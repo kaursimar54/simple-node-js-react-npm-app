@@ -19,6 +19,16 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
+        stage('make image') {
+            steps {
+                sh 'docker build -t simple-node-js-react:latest .'
+            }
+        }
+        stage('push image') {
+            steps {
+                sh 'docker push simple-node-js-react-npm'
+            }
+        }
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
