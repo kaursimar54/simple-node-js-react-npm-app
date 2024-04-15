@@ -7,6 +7,8 @@ pipeline {
     }
     environment {
         CI = 'true'
+        registry = "kaursimar542/docker"
+        registryCredential = 'dockerhub'
     }
     stages {
         stage('Build') {
@@ -21,12 +23,18 @@ pipeline {
         }
         stage('make image') {
             steps {
-                sh 'docker build -t simple-node-js-react:latest .'
+                script {
+                    dockerImage = docker.build registry + ":latest"
+                }
+                // sh 'docker build -t simple-node-js-react:latest .'
             }
         }
         stage('push image') {
             steps {
-                sh 'docker push simple-node-js-react-npm'
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                // sh 'docker push simple-node-js-react-npm'
             }
         }
         stage('Deliver') {
