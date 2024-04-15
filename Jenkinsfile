@@ -32,9 +32,10 @@ pipeline {
         stage('push image') {
             steps {
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( '', registryCredential )
                     dockerImage.push()
                 // sh 'docker push simple-node-js-react-npm'
+                }
             }
         }
         stage('Deliver') {
