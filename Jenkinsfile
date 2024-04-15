@@ -1,16 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:lts-buster-slim'
-            args '-p 3000:3000'
-        }
-    }
+    agent any
     environment {
         CI = 'true'
         registry = "kaursimar542/docker"
         registryCredential = 'dockerhub'
     }
+
     stages {
+         stage('Initialize') {
+            def dockerHome = tool 'myDocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
