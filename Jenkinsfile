@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:latest' // Example Docker image with Node.js
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount Docker socket
-        }
-    }
+    agent any
     environment {
         CI = 'true'
         registry = "kaursimar542/docker"
