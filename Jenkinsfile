@@ -25,14 +25,14 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        // stage('make image') {
-        //     steps {
-        //         script {
-        //             dockerImage = docker.build registry + ":latest"
-        //         }
-        //         // sh 'docker build -t simple-node-js-react:latest .'
-        //     }
-        // }
+        stage('make image') {
+             steps {
+                script {
+                    dockerImage = docker.build  "${imagename}:latest"
+                }
+                 // sh 'docker build -t simple-node-js-react:latest .'
+           }
+        }
         // stage('push image') {
         //     steps {
         //         script {
