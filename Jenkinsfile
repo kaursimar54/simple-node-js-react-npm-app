@@ -28,7 +28,7 @@ pipeline {
        // stage('make image') {
            //  steps {
                // script {
-                 //   dockerImage = docker.build  "${imagename}:latest"
+                 //   dockerImage = docker.build registry+ ":latest"
                // }
                  // sh 'docker build -t simple-node-js-react:latest .'
          //  }
